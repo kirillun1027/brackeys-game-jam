@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponProperties" load_steps=3 format=3 uid="uid://ca40vurd7co11"]
+
+[ext_resource type="PackedScene" uid="uid://d2yjxu8qrydv3" path="res://Weapons/bow_attack_area.tscn" id="1_3vjnh"]
+[ext_resource type="Script" uid="uid://cfkb1nddwvt6j" path="res://Weapons/weapon_properties.gd" id="1_hytus"]
+
+[resource]
+script = ExtResource("1_hytus")
+damage = 2
+attack_type = 1
+lifetime = 5.0
+cooldown = 0.3
+attack_area = ExtResource("1_3vjnh")
+metadata/_custom_type_script = "uid://cfkb1nddwvt6j"

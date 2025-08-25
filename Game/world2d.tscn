@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://4plppxq7th5f"]
+
+[ext_resource type="Script" uid="uid://c8dat1kde3j3g" path="res://Game/world_2d.gd" id="1_jlnav"]
+[ext_resource type="PackedScene" uid="uid://cyanccl4v51ac" path="res://Player/player.tscn" id="2_jlnav"]
+[ext_resource type="PackedScene" uid="uid://gdnutflsqawt" path="res://Props/dummy.tscn" id="3_o3dun"]
+
+[node name="World2D" type="Node2D"]
+script = ExtResource("1_jlnav")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="Player" parent="." node_paths=PackedStringArray("EntityPool") instance=ExtResource("2_jlnav")]
+position = Vector2(-101, -7)
+EntityPool = NodePath("../EntityPool")
+
+[node name="EntityPool" type="Node" parent="."]
+
+[node name="Dummy" parent="." instance=ExtResource("3_o3dun")]
+position = Vector2(57, -11)

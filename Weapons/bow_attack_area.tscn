@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2yjxu8qrydv3"]
+
+[ext_resource type="Script" uid="uid://d2okkowlktiq8" path="res://Weapons/bow_attack_area.gd" id="1_txs7p"]
+
+[node name="BowAttackArea" type="Area2D"]
+script = ExtResource("1_txs7p")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, 1, 15, 1, 15, 3, 20, 0, 15, -3, 15, -1, -1, -1)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0.898039, 0, 1)
+polygon = PackedVector2Array(-1, -1, -1, 1, 15, 1, 15, 3, 20, 0, 15, -3, 15, -1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
