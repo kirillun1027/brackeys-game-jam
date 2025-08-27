@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2k6v7n4pmk81"]
+
+[ext_resource type="Texture2D" uid="uid://d2g51iojw8mpi" path="res://Assets/Player/pink_gem_sword.png" id="1_w6xwc"]
+
+[node name="ItemDisplayButton" type="TextureRect"]
+texture = ExtResource("1_w6xwc")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="PurchaseButton" type="Button" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

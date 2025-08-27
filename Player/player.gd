@@ -2,24 +2,29 @@ extends CharacterBody2D
 class_name Player
 
 @export var dash_graph: Curve
-@export var health: int = 1
-@onready var hp: int = health
+@export var health: int = 10
 @export var attack_area_rotation: float = 0
-@export var EntityPool: Node
-var spawn_points: Node2D
+@export var spawn_points: Node2D
 var speed: float = 200
-var sprint_speed: float = speed * 2
-var dash_speed: float = speed * 5
+var acc_time: float = .125
+var sprint_speed: float = speed * 1.5
+var dash_speed: float = speed * 4
 var is_dashing: bool = false
 var dash_direction: Vector2
 var player_id: int = 1
-signal update_direction(dir: Vector2)
+var biscuits: int = 200
+#signal update_direction(dir: Vector2) DEPRECATED
+@onready var hp: int = health
 @onready var dash_timer = $DashTimer
-@onready var attack_component: AttackComponent = $AttackComponent
+@onready var attack_component: PlayerAttackComponent = $AttackComponent
 @onready var start_position: Vector2 = global_position
+@onready var cooldown_bar: ProgressBar = $"../CanvasLayer/GUI/CooldownBar"
+@onready var biscuit_count_label: Label = $"../CanvasLayer/GUI/BiscuitCountLabel"
 
 
-func move(_delta: float):
+
+
+func move(delta: float):
 	var direction: Vector2
 	if not is_dashing:
 		direction = Input.get_vector(
@@ -28,11 +33,8 @@ func move(_delta: float):
 	else:
 		direction = dash_direction
 	
-	update_direction.emit(direction)
-	
-	if Input.is_action_pressed("sprint"):	velocity = sprint_speed * direction
-	else: velocity = speed * direction
-	
+	#update_direction.emit(direction)
+
 	if Input.is_action_just_pressed("dash"):
 		dash_timer.start()
 		is_dashing = true
@@ -40,13 +42,28 @@ func move(_delta: float):
 	
 	if is_dashing:
 		var progress: float = (dash_timer.wait_time - dash_timer.time_left)/ dash_timer.wait_time
-		velocity += dash_speed * dash_graph.sample(progress) * direction
+		velocity = dash_speed * dash_graph.sample(progress) * direction
+
+	else:
+		var active_speed: int = speed
+		if Input.is_action_pressed("sprint"):	active_speed = sprint_speed
+		#velocity = active_speed * direction
+		velocity.x = move_toward(velocity.x, active_speed * direction.x, active_speed / acc_time * delta)
+		velocity.y = move_toward(velocity.y, active_speed * direction.y, active_speed / acc_time * delta)
 	
 	
 	move_and_slide()
 
-func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
+func _ready() -> void:
+	if get_tree().current_scene.name != "World": return
+	cooldown_bar.min_value = 0
+	biscuit_count_label.text = "Biscuit count: " + str(biscuits)
+	
+
+func _process(delta: float) -> void:
+	cooldown_bar.max_value = attack_component.cool_down_timer.wait_time
+	cooldown_bar.value = cooldown_bar.max_value - attack_component.cool_down_timer.time_left
+	biscuit_count_label.text = "Biscuit count: " + str(biscuits)
 
 func _physics_process(delta: float) -> void:
 	move(delta)

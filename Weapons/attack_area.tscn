@@ -1,8 +1,58 @@
-[gd_scene format=3 uid="uid://rxqdtp42h5fw"]
+[gd_scene load_steps=8 format=3 uid="uid://rxqdtp42h5fw"]
+
+[ext_resource type="Script" uid="uid://bbwg23mxwdkqq" path="res://Weapons/attack_area.gd" id="1_c1uv8"]
+[ext_resource type="Texture2D" uid="uid://d1sa6qr4en1kh" path="res://Assets/Player/AttackSprite01.png" id="1_s4o2x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1uv8"]
+atlas = ExtResource("1_s4o2x")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on4c0"]
+atlas = ExtResource("1_s4o2x")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj62h"]
+atlas = ExtResource("1_s4o2x")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_370qg"]
+atlas = ExtResource("1_s4o2x")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ws1rn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1uv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on4c0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj62h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_370qg")
+}],
+"loop": false,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="AttackArea" type="Area2D"]
+script = ExtResource("1_c1uv8")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -14, 8, -13, 14, -7, 17, 4, 5, 13, 0, 11, 0, 7, 10, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, 0, 6, -6, 9, -5, 11, -3, 12, 0, 11, 3, 9, 5, 6, 6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, -2.38419e-07)
+rotation = -0.676656
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ws1rn")
+frame = 3
+frame_progress = 1.0

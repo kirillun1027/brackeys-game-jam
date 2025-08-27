@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dehhnchn7mbpb"]
+
+[ext_resource type="PackedScene" uid="uid://gdnutflsqawt" path="res://Props/dummy.tscn" id="1_n1df7"]
+[ext_resource type="Script" uid="uid://t34ou1h3ev12" path="res://Props/attack_component.gd" id="2_7cavd"]
+[ext_resource type="Script" uid="uid://dh2j0s0pysq7" path="res://Props/navigation_component.gd" id="3_a4i6x"]
+
+[node name="Enemy" instance=ExtResource("1_n1df7")]
+modulate = Color(0.732231, 0.502366, 9.62615e-07, 1)
+
+[node name="AttackComponent" type="Node2D" parent="." index="3"]
+script = ExtResource("2_7cavd")
+
+[node name="CooldownTimer" type="Timer" parent="AttackComponent" index="0"]
+
+[node name="LifetimeTimer" type="Timer" parent="AttackComponent" index="1"]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="4"]
+avoidance_enabled = true
+script = ExtResource("3_a4i6x")
+
+[connection signal="timeout" from="AttackComponent/CooldownTimer" to="AttackComponent" method="_on_cooldown_timeout"]
+[connection signal="timeout" from="AttackComponent/LifetimeTimer" to="AttackComponent" method="_on_lifetime_timeout"]
+[connection signal="path_changed" from="NavigationAgent2D" to="NavigationAgent2D" method="_on_path_changed"]
+[connection signal="target_reached" from="NavigationAgent2D" to="NavigationAgent2D" method="_on_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="NavigationAgent2D" method="_on_velocity_computed"]

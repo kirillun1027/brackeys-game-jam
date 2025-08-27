@@ -1,17 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://cyanccl4v51ac"]
 
 [ext_resource type="Script" uid="uid://5cd6dam68xx3" path="res://Player/player.gd" id="1_gwnis"]
-[ext_resource type="Texture2D" uid="uid://byd4t58phaamo" path="res://WhiteCircle1.png" id="1_l8h54"]
+[ext_resource type="Texture2D" uid="uid://byd4t58phaamo" path="res://Assets/Player/WhiteCircle1.png" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://bx75gaqsfepqi" path="res://Player/attack_component.gd" id="3_k53q1"]
 
 [sub_resource type="Curve" id="Curve_gwnis"]
-_data = [Vector2(0, 0.269663), 0.0, 0.0, 0, 0, Vector2(0.5, 0.865169), 0.0, 0.0, 0, 0, Vector2(0.994681, 0.292135), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.269663), 0.0, 0.0, 0, 0, Vector2(0.515957, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.303371), -0.07284, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ntmi"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 texture_filter = 1
 script = ExtResource("1_gwnis")
 dash_graph = SubResource("Curve_gwnis")
@@ -32,7 +32,6 @@ script = ExtResource("3_k53q1")
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[connection signal="update_direction" from="." to="AttackComponent" method="_on_update_direction"]
 [connection signal="timeout" from="AttackComponent/CooldownTimer" to="AttackComponent" method="_on_cooldown_timeout"]
 [connection signal="timeout" from="AttackComponent/LifetimeTimer" to="AttackComponent" method="_on_lifetime_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_exited"]

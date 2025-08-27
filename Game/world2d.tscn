@@ -1,20 +1,104 @@
-[gd_scene load_steps=4 format=3 uid="uid://4plppxq7th5f"]
+[gd_scene load_steps=12 format=3 uid="uid://4plppxq7th5f"]
 
 [ext_resource type="Script" uid="uid://c8dat1kde3j3g" path="res://Game/world_2d.gd" id="1_jlnav"]
 [ext_resource type="PackedScene" uid="uid://cyanccl4v51ac" path="res://Player/player.tscn" id="2_jlnav"]
+[ext_resource type="PackedScene" uid="uid://ce7t56ageu6bx" path="res://Items/weapon_item_entity.tscn" id="3_f7pci"]
 [ext_resource type="PackedScene" uid="uid://gdnutflsqawt" path="res://Props/dummy.tscn" id="3_o3dun"]
+[ext_resource type="Texture2D" uid="uid://d2g51iojw8mpi" path="res://Assets/Player/pink_gem_sword.png" id="4_aith4"]
+[ext_resource type="Resource" uid="uid://b7q55dylcodhw" path="res://Weapons/sword.tres" id="4_cg0j2"]
+[ext_resource type="LabelSettings" uid="uid://ddwue5jn48ljw" path="res://UI/Style/new_label_settings.tres" id="7_cg0j2"]
+[ext_resource type="PackedScene" uid="uid://cv40y7ekts2ll" path="res://UI/store_gui.tscn" id="8_v5w2q"]
+[ext_resource type="PackedScene" uid="uid://dehhnchn7mbpb" path="res://Props/enemy.tscn" id="9_o35y2"]
+[ext_resource type="PackedScene" uid="uid://1e0t3xv2l02r" path="res://Props/store.tscn" id="10_r66bl"]
 
-[node name="World2D" type="Node2D"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dnpwq"]
+vertices = PackedVector2Array(-20, 71, 229, 125.953, -229.031, 124.039, -62, 71, -229.961, -125.969, -62, 37, 229, -125.023, -20, 37)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(7, 6, 1, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-240, -136, -239, 134, 239, 136, 239, -135)])
+
+[node name="World2D" type="Node2D" node_paths=PackedStringArray("EntityPool", "player")]
 script = ExtResource("1_jlnav")
+EntityPool = NodePath("EntityPool")
+player = NodePath("Player")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+[node name="Enemy" parent="." instance=ExtResource("9_o35y2")]
+position = Vector2(-38, -47)
 
-[node name="Player" parent="." node_paths=PackedStringArray("EntityPool") instance=ExtResource("2_jlnav")]
+[node name="Player" parent="." instance=ExtResource("2_jlnav")]
 position = Vector2(-101, -7)
-EntityPool = NodePath("../EntityPool")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+process_callback = 0
+position_smoothing_enabled = true
 
 [node name="EntityPool" type="Node" parent="."]
 
+[node name="WeaponItemEntity" parent="EntityPool" instance=ExtResource("3_f7pci")]
+position = Vector2(-115, 54)
+weapon_data = ExtResource("4_cg0j2")
+
+[node name="Sprite2D" type="Sprite2D" parent="EntityPool/WeaponItemEntity"]
+texture = ExtResource("4_aith4")
+
 [node name="Dummy" parent="." instance=ExtResource("3_o3dun")]
 position = Vector2(57, -11)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CooldownBar" type="ProgressBar" parent="CanvasLayer/GUI"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 46.0
+offset_bottom = 116.0
+fill_mode = 3
+show_percentage = false
+
+[node name="BiscuitCountLabel" type="Label" parent="CanvasLayer/GUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -757.0
+offset_top = 51.0
+offset_right = -57.0
+offset_bottom = 102.0
+grow_horizontal = 0
+text = "Biscuit count: 0"
+label_settings = ExtResource("7_cg0j2")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GUI/BiscuitCountLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -17.0
+offset_right = 10.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StoreGUI" parent="CanvasLayer" instance=ExtResource("8_v5w2q")]
+visible = false
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-202, -101)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_dnpwq")
+
+[node name="Store" parent="NavigationRegion2D" instance=ExtResource("10_r66bl")]
+position = Vector2(-41, 46)

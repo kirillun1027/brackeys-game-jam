@@ -1,6 +1,8 @@
 extends Node2D
 
 const MAIN_MENU: String = "res://Game/main_menu.tscn"
+@export var EntityPool: Node
+@export var player: Player
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("leave"):

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byd4t58phaamo"
-path="res://.godot/imported/WhiteCircle1.png-f94aefd51c067e987d6bf3a67712bd17.ctex"
+uid="uid://d1sa6qr4en1kh"
+path="res://.godot/imported/AttackSprite01.png-6a53f0626e7896a9142037507c58a2ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://WhiteCircle1.png"
-dest_files=["res://.godot/imported/WhiteCircle1.png-f94aefd51c067e987d6bf3a67712bd17.ctex"]
+source_file="res://Assets/Player/AttackSprite01.png"
+dest_files=["res://.godot/imported/AttackSprite01.png-6a53f0626e7896a9142037507c58a2ed.ctex"]
 
 [params]
 

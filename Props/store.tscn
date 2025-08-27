@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://1e0t3xv2l02r"]
+
+[ext_resource type="Script" uid="uid://4n7u5j1c2a" path="res://Props/store.gd" id="1_6tion"]
+[ext_resource type="Texture2D" uid="uid://dcxt8vd8l6rww" path="res://Assets/Store1.png" id="1_hpr1i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tion"]
+size = Vector2(26, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgwi3"]
+size = Vector2(22, 14)
+
+[node name="Store" type="StaticBody2D"]
+script = ExtResource("1_6tion")
+
+[node name="PurchaseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PurchaseArea"]
+position = Vector2(0, 14.5)
+shape = SubResource("RectangleShape2D_6tion")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_mgwi3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hpr1i")
+
+[connection signal="body_entered" from="PurchaseArea" to="." method="_on_purchase_area_entered"]

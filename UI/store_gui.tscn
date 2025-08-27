@@ -1,0 +1,119 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv40y7ekts2ll"]
+
+[ext_resource type="Texture2D" uid="uid://bx7qc72v3e6ab" path="res://Assets/Player/bow.png" id="1_25tyw"]
+[ext_resource type="Texture2D" uid="uid://d2g51iojw8mpi" path="res://Assets/Player/pink_gem_sword.png" id="1_85fht"]
+[ext_resource type="Script" uid="uid://dgxnkdhx23aja" path="res://UI/store.gd" id="1_holoq"]
+[ext_resource type="LabelSettings" uid="uid://ddwue5jn48ljw" path="res://UI/Style/new_label_settings.tres" id="3_nxsl6"]
+
+[node name="StoreGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_holoq")
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+offset_right = 77.0
+offset_bottom = 160.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 427.0
+offset_bottom = 428.0
+tooltip_text = "Bro stop"
+
+[node name="ItemDisplayRow" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SwordDisplayButton" type="TextureRect" parent="VBoxContainer/ItemDisplayRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_85fht")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="PurchaseButton" type="Button" parent="VBoxContainer/ItemDisplayRow/SwordDisplayButton"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/ItemDisplayRow/SwordDisplayButton"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/ItemDisplayRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer/ItemDisplayRow/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "1500 Biscuits"
+label_settings = ExtResource("3_nxsl6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ItemDisplayRow2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SwordDisplayButton" type="TextureRect" parent="VBoxContainer/ItemDisplayRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_25tyw")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="PurchaseButton" type="Button" parent="VBoxContainer/ItemDisplayRow2/SwordDisplayButton"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/ItemDisplayRow2/SwordDisplayButton"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/ItemDisplayRow2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer/ItemDisplayRow2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "2300 Biscuits"
+label_settings = ExtResource("3_nxsl6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
