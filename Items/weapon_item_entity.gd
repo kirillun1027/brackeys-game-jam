@@ -6,5 +6,5 @@ extends Area2D
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		body.attack_component.available_weapons.append(weapon_data)
+		body.attack_component.add_weapon(weapon_data)
 		queue_free()

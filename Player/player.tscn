@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://5cd6dam68xx3" path="res://Player/player.gd" id="1_gwnis"]
 [ext_resource type="Texture2D" uid="uid://byd4t58phaamo" path="res://Assets/Player/WhiteCircle1.png" id="1_l8h54"]
-[ext_resource type="Script" uid="uid://bx75gaqsfepqi" path="res://Player/attack_component.gd" id="3_k53q1"]
+[ext_resource type="Script" uid="uid://bx75gaqsfepqi" path="res://Player/player_attack_component.gd" id="3_k53q1"]
 
 [sub_resource type="Curve" id="Curve_gwnis"]
 _data = [Vector2(0, 0.269663), 0.0, 0.0, 0, 0, Vector2(0.515957, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.303371), -0.07284, 0.0, 0, 0]
@@ -12,6 +12,7 @@ point_count = 3
 radius = 7.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_gwnis")
 dash_graph = SubResource("Curve_gwnis")

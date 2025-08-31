@@ -10,6 +10,7 @@ size = Vector2(26, 7)
 size = Vector2(22, 14)
 
 [node name="Store" type="StaticBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_6tion")
 
 [node name="PurchaseArea" type="Area2D" parent="."]
@@ -26,3 +27,4 @@ shape = SubResource("RectangleShape2D_mgwi3")
 texture = ExtResource("1_hpr1i")
 
 [connection signal="body_entered" from="PurchaseArea" to="." method="_on_purchase_area_entered"]
+[connection signal="body_exited" from="PurchaseArea" to="." method="_on_purchase_area_exited"]

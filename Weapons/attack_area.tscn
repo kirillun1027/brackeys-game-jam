@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://rxqdtp42h5fw"]
 
-[ext_resource type="Script" uid="uid://bbwg23mxwdkqq" path="res://Weapons/attack_area.gd" id="1_c1uv8"]
+[ext_resource type="Script" uid="uid://bbwg23mxwdkqq" path="res://Weapons/WeaponScripts/attack_area.gd" id="1_c1uv8"]
 [ext_resource type="Texture2D" uid="uid://d1sa6qr4en1kh" path="res://Assets/Player/AttackSprite01.png" id="1_s4o2x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c1uv8"]
@@ -35,8 +35,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_370qg")
 }],
 "loop": false,
-"name": &"default",
-"speed": 6.0
+"name": &"attack",
+"speed": 12.0
 }]
 
 [node name="AttackArea" type="Area2D"]
@@ -54,5 +54,4 @@ position = Vector2(3, -2.38419e-07)
 rotation = -0.676656
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ws1rn")
-frame = 3
-frame_progress = 1.0
+animation = &"attack"

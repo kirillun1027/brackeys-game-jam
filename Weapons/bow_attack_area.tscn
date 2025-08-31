@@ -1,8 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://d2yjxu8qrydv3"]
 
-[ext_resource type="Script" uid="uid://d2okkowlktiq8" path="res://Weapons/bow_attack_area.gd" id="1_txs7p"]
+[ext_resource type="Script" uid="uid://d2okkowlktiq8" path="res://Weapons/WeaponScripts/bow_attack_area.gd" id="1_txs7p"]
 
 [node name="BowAttackArea" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_txs7p")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

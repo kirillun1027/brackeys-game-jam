@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4h8703rr8fc4"]
+
+[ext_resource type="Script" uid="uid://dwqs8gb11vo5b" path="res://Weapons/WeaponScripts/hammer_attack_area.gd" id="1_ighk8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7k2y"]
+
+[node name="hammer_attack_area" type="Area2D"]
+script = ExtResource("1_ighk8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v7k2y")
+
+[node name="Line2D" type="Line2D" parent="."]
+closed = true
+width = 5.0
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="AnimationTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timeout"]

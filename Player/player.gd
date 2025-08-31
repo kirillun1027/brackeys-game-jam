@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var dash_graph: Curve
-@export var health: int = 10
+@export var health: float = 10
 @export var attack_area_rotation: float = 0
 @export var spawn_points: Node2D
 var speed: float = 200
@@ -12,14 +12,17 @@ var dash_speed: float = speed * 4
 var is_dashing: bool = false
 var dash_direction: Vector2
 var player_id: int = 1
-var biscuits: int = 200
+var biscuits: int = 2000
+var is_in_safe_zone: bool = false
 #signal update_direction(dir: Vector2) DEPRECATED
-@onready var hp: int = health
+@onready var hp: float = health
 @onready var dash_timer = $DashTimer
 @onready var attack_component: PlayerAttackComponent = $AttackComponent
 @onready var start_position: Vector2 = global_position
 @onready var cooldown_bar: ProgressBar = $"../CanvasLayer/GUI/CooldownBar"
-@onready var biscuit_count_label: Label = $"../CanvasLayer/GUI/BiscuitCountLabel"
+@onready var biscuit_count_label: Label = $"../CanvasLayer/GUI/HBoxContainer/BiscuitCountLabel"
+
+
 
 
 
@@ -62,7 +65,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	cooldown_bar.max_value = attack_component.cool_down_timer.wait_time
-	cooldown_bar.value = cooldown_bar.max_value - attack_component.cool_down_timer.time_left
+	cooldown_bar.value = cooldown_bar.max_value - attack_component.cool_down_timer.time_left if !attack_component.cool_down_timer.is_stopped() else 1.0
 	biscuit_count_label.text = "Biscuit count: " + str(biscuits)
 
 func _physics_process(delta: float) -> void:
