@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyanccl4v51ac"]
+[gd_scene load_steps=8 format=3 uid="uid://cyanccl4v51ac"]
 
 [ext_resource type="Script" uid="uid://5cd6dam68xx3" path="res://Player/player.gd" id="1_gwnis"]
 [ext_resource type="Texture2D" uid="uid://byd4t58phaamo" path="res://Assets/Player/WhiteCircle1.png" id="1_l8h54"]
 [ext_resource type="Script" uid="uid://bx75gaqsfepqi" path="res://Player/player_attack_component.gd" id="3_k53q1"]
+[ext_resource type="Script" uid="uid://cutodycurlws4" path="res://Player/weapon_hotbar.gd" id="4_gwnis"]
+[ext_resource type="Texture2D" uid="uid://c866pg4y8ykaa" path="res://Items/16x16ItemSelect48x48Frame1.png" id="5_k53q1"]
 
 [sub_resource type="Curve" id="Curve_gwnis"]
 _data = [Vector2(0, 0.269663), 0.0, 0.0, 0, 0, Vector2(0.515957, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.303371), -0.07284, 0.0, 0, 0]
@@ -32,6 +34,38 @@ script = ExtResource("3_k53q1")
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WeaponHotbar" type="Panel" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+show_behind_parent = true
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 50.0
+offset_bottom = 178.0
+script = ExtResource("4_gwnis")
+player = NodePath("../..")
+
+[node name="HotbarSlotContainer" type="HBoxContainer" parent="CanvasLayer/WeaponHotbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemSelectFrame" type="TextureRect" parent="CanvasLayer/WeaponHotbar"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-64, -64)
+texture = ExtResource("5_k53q1")
+expand_mode = 1
+stretch_mode = 3
 
 [connection signal="timeout" from="AttackComponent/CooldownTimer" to="AttackComponent" method="_on_cooldown_timeout"]
 [connection signal="timeout" from="AttackComponent/LifetimeTimer" to="AttackComponent" method="_on_lifetime_timeout"]

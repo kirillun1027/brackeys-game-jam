@@ -10,6 +10,7 @@
 [ext_resource type="LabelSettings" uid="uid://37qhiso1yc2o" path="res://UI/Style/BigLabel.tres" id="7_rb8l3"]
 
 [node name="StoreGUI" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,8 +21,17 @@ script = ExtResource("1_holoq")
 
 [node name="ItemDisplays" type="VBoxContainer" parent="."]
 layout_mode = 1
-offset_right = 427.0
-offset_bottom = 428.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.5
+offset_top = -215.0
+offset_right = 213.5
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
 tooltip_text = "Bro stop"
 
 [node name="ItemDisplayRow" type="HBoxContainer" parent="ItemDisplays"]

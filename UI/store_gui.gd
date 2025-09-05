@@ -11,3 +11,4 @@ func _ready() -> void:
 func on_child_disconnected():
 	if get_child_count() == 1:
 		sold_out_label.show()
+	print(log)

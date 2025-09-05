@@ -1,9 +1,12 @@
-[gd_scene load_steps=106 format=3 uid="uid://btaqest10stqi"]
+[gd_scene load_steps=110 format=3 uid="uid://btaqest10stqi"]
 
 [ext_resource type="Script" uid="uid://dk1lfm3g0bne8" path="res://station.gd" id="1_elwba"]
 [ext_resource type="Texture2D" uid="uid://bohwk8rankh6m" path="res://Environment/Pixel Crawler - Free Pack/Environment/Structures/Stations/Anvil/Anvil_01-Sheet.png" id="2_kq8x7"]
 [ext_resource type="Texture2D" uid="uid://dppl76alk5wlb" path="res://Environment/Pixel Crawler - Free Pack/Environment/Structures/Stations/Anvil/Anvil_02-Sheet.png" id="3_s00sb"]
 [ext_resource type="Texture2D" uid="uid://dtjvqxilca8em" path="res://Environment/Pixel Crawler - Free Pack/Environment/Structures/Stations/Anvil/Anvil_03-Sheet.png" id="4_5ps4t"]
+[ext_resource type="Theme" uid="uid://b4se6i5uej5j" path="res://UI/Style/GUITheme1.tres" id="5_5ps4t"]
+[ext_resource type="Texture2D" uid="uid://d2g51iojw8mpi" path="res://Assets/Player/pink_gem_sword.png" id="5_s00sb"]
+[ext_resource type="Texture2D" uid="uid://dud7owdypvro6" path="res://Assets/16x16WhiteArrow.png" id="6_5ps4t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bm6gh"]
 atlas = ExtResource("2_kq8x7")
@@ -728,6 +731,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08sck"]
 size = Vector2(33, 12)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bm6gh"]
+bg_color = Color(0.6, 0.6, 0.6, 0.498039)
+
 [node name="WorkStation" type="StaticBody2D"]
 script = ExtResource("1_elwba")
 
@@ -780,7 +786,123 @@ shape = SubResource("RectangleShape2D_08sck")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="WorkstationGUI" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIPanel" type="Panel" parent="CanvasLayer/WorkstationGUI"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = 47.0
+offset_right = -44.0
+offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bm6gh")
+
+[node name="UpgradeSeletionMenuContainer" type="VBoxContainer" parent="CanvasLayer/WorkstationGUI"]
+layout_mode = 2
+offset_left = 242.0
+offset_top = 600.0
+offset_right = 1678.0
+offset_bottom = 879.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="UpgradeButton" type="Button" parent="CanvasLayer/WorkstationGUI/UpgradeSeletionMenuContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_5ps4t")
+text = "Upgrade for X Biscuits"
+
+[node name="InteractiveUIContainer" type="AspectRatioContainer" parent="CanvasLayer/WorkstationGUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 177.0
+offset_top = 144.0
+offset_right = -181.0
+offset_bottom = -597.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 4.6
+alignment_horizontal = 0
+alignment_vertical = 0
+
+[node name="CraftMenuContainer" type="HBoxContainer" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer"]
+layout_mode = 2
+
+[node name="InputPanel" type="Panel" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer/InputPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_s00sb")
+
+[node name="Button" type="Button" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer/InputPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Label" type="Label" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_5ps4t")
+text = "5"
+horizontal_alignment = 1
+
+[node name="SeparationControl1" type="Control" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_5ps4t")
+
+[node name="SeparationControl2" type="Control" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="OutputPanel" type="Panel" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer/OutputPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_s00sb")
+
+[node name="Button" type="Button" parent="CanvasLayer/WorkstationGUI/InteractiveUIContainer/CraftMenuContainer/OutputPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true

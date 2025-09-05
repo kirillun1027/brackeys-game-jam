@@ -8,6 +8,7 @@ class_name PlayerAttackComponent
 var attack_area_instances: Array[Node]
 var direction: Vector2 = Vector2.ZERO
 var is_cooldown: bool = false
+signal weapons_updated()
 
 
 const BOW: WeaponProperties = preload("res://Weapons/WeaponData/bow.tres")
@@ -28,11 +29,14 @@ var WeaponBaseStats: Dictionary[Weapon, WeaponProperties] = {
 
 func _ready() -> void:
 	add_weapon(HAMMER)
+	add_weapon(HAMMER)
+	swap_weapons()
 
 func add_weapon(properties: WeaponProperties):
 	var new_weapon = Weapon.new(properties)
 	available_weapons.append(new_weapon)
-	WeaponBaseStats.set(new_weapon, properties)
+	WeaponBaseStats.get_or_add(new_weapon, properties)
+	weapons_updated.emit()
 
 func _process(delta: float) -> void:
 	direction = (get_global_mouse_position() - global_position).normalized()
@@ -41,11 +45,13 @@ func _process(delta: float) -> void:
 #region Weapon Swap and Input
 
 func swap_weapons():
+	if available_weapons.is_empty(): return
 	var current_weapon_id = available_weapons.find(active_weapon)
 	if current_weapon_id < available_weapons.size() - 1:
 		active_weapon = available_weapons[current_weapon_id + 1]
 	else:
 		active_weapon = available_weapons[0]
+	call_deferred("emit_signal", "weapons_updated")
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("weapon_swap"):
@@ -83,12 +89,18 @@ func attack():
 func on_body_attacked(body: Node):
 	if body.is_in_group("damagable"): 
 		body.recieve_damage(active_weapon.damage)
+		if body is Enemy:
+			if body.died.is_connected(on_enemy_death): return
+			body.died.connect(on_enemy_death)
 		return
 	if body is Player and body.name != get_parent().name: 
 		body.recieve_damage(active_weapon.damage)
 		return
 #endregion
 
+
+func on_enemy_death():
+	get_parent().biscuits += 1
 
 #region Timers
 

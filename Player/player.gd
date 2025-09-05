@@ -12,9 +12,8 @@ var dash_speed: float = speed * 4
 var is_dashing: bool = false
 var dash_direction: Vector2
 var player_id: int = 1
-var biscuits: int = 2000
+var biscuits: int = 0
 var is_in_safe_zone: bool = false
-#signal update_direction(dir: Vector2) DEPRECATED
 @onready var hp: float = health
 @onready var dash_timer = $DashTimer
 @onready var attack_component: PlayerAttackComponent = $AttackComponent

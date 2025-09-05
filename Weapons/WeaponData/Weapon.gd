@@ -6,6 +6,7 @@ var lifetime: float
 var cooldown: float
 var attack_area: PackedScene
 var cost: int
+var icon: Texture
 var instance_of: StringName
 
 func _init(weapon_data: WeaponProperties) -> void:
@@ -16,3 +17,4 @@ func _init(weapon_data: WeaponProperties) -> void:
 	attack_area = weapon_data.attack_area
 	cost = weapon_data.cost
 	instance_of = weapon_data.name
+	icon = weapon_data.icon
